@@ -37,7 +37,14 @@ def traverse_preorder(root, stack):
 
 # preorder traversal - iterative
 def preorder_iterative(root):
-
+    stack, preorder = [root], []
+    while stack:
+        node = stack.pop()
+        if node:
+            preorder.append(node.val)
+            stack.append(node.right)
+            stack.append(node.left)
+    return preorder
 
 
 # postorder traversal - recursive
@@ -54,11 +61,29 @@ def traverse_postorder(root, stack):
 
 # postorder traversal - iterative
 def postorder_iterative(root):
-
+    stack, postorder = [root], []
+    while stack:
+        node = stack.pop()
+        if node:
+            postorder.append(node.val)
+            stack.append(node.left)
+            stack.append(node.right)
+    return postorder[::-1]
 
 # level order traversal - recursive (DFS)
+def levelOrder(root):
+    res = []
+    dfs(root, 0, res)
+    return res
 
-
+def dfs(root, level, res):
+    if not root:
+        return
+    if len(res) < level + 1:
+        res.append([])
+    res[level].append(root.val)
+    dfs(root.left, level+1, res)
+    dfs(root.right, level+1, res)
 
 # level order traversal - iterative (BFS)
 def bfs(root):
