@@ -7,7 +7,7 @@ def linear_search(x,val):
         if x[i] == val:
             return i
     return None
-    
+
 def binary_search(x,val):
     low = 0
     high = len(x)-1
@@ -26,7 +26,7 @@ def binary_search(x,val):
 def insertion_sort(x):
     for i in range(1,len(x)):
         j = i
-        temp = x[j]
+        temp = x[i]
         while temp < x[j-1] and j > 0:
             x[j] = x[j-1]
             j -= 1
@@ -51,50 +51,54 @@ def merge_sort(x):
                 j += 1
             k+=1
 
-        while i < len(l): 
-            x[k] = l[i] 
+        while i < len(l):
+            x[k] = l[i]
             i+= 1
             k+= 1
-          
-        while j < len(r): 
-            x[k] = r[j] 
+
+        while j < len(r):
+            x[k] = r[j]
             j+= 1
             k+= 1
     return x
-            
+
 def bubble_sort(x):
     for i in range(len(x)):
-        for j in range(0,len(x)-i-1):
+        for j in range(len(x)-i-1):
             if x[j] > x[j+1]:
                 x[j], x[j+1] = x[j+1],x[j]
     return x
 
 def quick_sort(x, start, stop):
-    if(start < stop): 
-        pivot = pr(x, start, stop) 
-        quick_sort(x , start , pivot) 
-        quick_sort(x, pivot + 1, stop) 
+    if(start < stop):
+        pivot = pr(x, start, stop)
+        quick_sort(x , start , pivot)
+        quick_sort(x, pivot + 1, stop)
     return x
 
-def pr(x, start, stop): 
-    rpiv = random.randrange(start, stop) 
-    x[start], x[rpiv] = x[rpiv], x[start] 
+def pr(x, start, stop):
+    rpiv = random.randrange(start, stop)
+    x[start], x[rpiv] = x[rpiv], x[start]
     return p(x, start, stop)
 
-def p(x,start,stop): 
+def p(x,start,stop):
     temp = start
     i = start - 1
     j = stop + 1
-    while True: 
-        while True: 
+    while True:
+        while True:
             i = i + 1
-            if x[i] >= x[temp]: 
+            if x[i] >= x[temp]:
                 break
-        while True: 
+        while True:
             j = j - 1
-            if x[j] <= x[temp]: 
+            if x[j] <= x[temp]:
                 break
-        if i >= j: 
-            return j 
+        if i >= j:
+            return j
         x[i] , x[j] = x[j] , x[i]
-        
+
+list = [95, 78, 46, 58, 45, 86, 12, 312, 99, 251, 320]
+print("Value found on index", linear_search(list, 251))
+print("Sorted list:", quick_sort(list, 0, len(list)-1))
+print("Value found on index", binary_search(list, 86))
