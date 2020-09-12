@@ -1,3 +1,5 @@
+import heapq
+
 # inorder traversal - recursive
 def inorder(root):
     stack = []
@@ -101,4 +103,80 @@ def bfs(root):
         if root.right: queue.append(root.right)
     return element
 
-# implement BST, Red bLack tree, heap
+# heap library
+list = [5,7,9,11,3,16,21]
+heapq.heapify(list)
+print(list)
+heapq.heappush(list, 4)
+heapq.heappop(list)
+print(list)
+print(heapq.nlargest(3,list))
+print(heapq.nsmallest(2,list))
+
+# binary search tree implementation
+class Node:
+     def __init__(self, val=0, left=None, right=None):
+         self.val = val
+         self.left = left
+         self.right = right
+
+class BST:
+    def search(self, root, val):
+        if root is None or root.val == val:
+            return root
+        if root.val > val:
+            return self.search(root.left, val)
+        elif root.val < val:
+            return self.search(root.right, val)
+
+    def insert(self, root, val):
+        if root:
+            if root.val == val:
+                return root
+            elif root.val < val:
+                root.right = self.insert(root.right, val)
+            else:
+                root.left = self.insert(root.left, val)
+            return root
+        return Node(val)
+
+    def minNode(self, root):
+        while root.left is not None:
+            root = root.left
+        return root
+
+    def delete(self, root, val):
+        if root is None:
+            return root
+        if root.val > val:
+            root.left = delete(root.left, val)
+        elif root.val < val:
+            root.right = delete(root.right, val)
+        else:
+            if root.left is None:
+                temp = root.right
+                root = None
+                return temp
+            elif root.right is None:
+                temp = root.left
+                root = None
+                return temp
+
+            temp = minNode(root.right)
+            root.val = temp.val
+            root.right = delete(root.right, temp.val)
+        return root
+
+    def height(self, root):
+        if root is None:
+            return 0
+        return max(self.height(root.left), self.height(root.right)) + 1
+
+    def inverse(self, root):
+        if root is None:
+            return None
+        else:
+            root.left, root.right = root.right, root.left
+            self.inverse(root.left)
+            self.inverse(root.right)
+        return root
