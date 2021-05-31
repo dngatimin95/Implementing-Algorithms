@@ -87,11 +87,13 @@ def p(x,start,stop):
     j = stop + 1
     while True:
         while True:
-            i = i + 1
+            i += 1
+            print("i is currently on",i)
             if x[i] >= x[temp]:
                 break
         while True:
-            j = j - 1
+            j -= 1
+            print("j is currently on",j)
             if x[j] <= x[temp]:
                 break
         if i >= j:
@@ -99,6 +101,6 @@ def p(x,start,stop):
         x[i] , x[j] = x[j] , x[i]
 
 list = [95, 78, 46, 58, 45, 86, 12, 312, 99, 251, 320]
-print("Value found on index", linear_search(list, 251))
+#print("Value found on index", linear_search(list, 251))
 print("Sorted list:", quick_sort(list, 0, len(list)-1))
-print("Value found on index", binary_search(list, 86))
+#print("Value found on index", binary_search(list, 86))
